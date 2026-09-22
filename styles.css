@@ -2788,3 +2788,145 @@ html.js-ready .reveal.visible{
 @media (min-width:1025px){
   .mobile-controls{display:none !important}
 }
+
+/* =========================================================
+   FINAL MOBILE CONTROL + DESKTOP MOTION FIX
+   Only the requested mobile controls/motion are changed.
+   Desktop effects and scroll behavior remain enabled.
+   ========================================================= */
+
+@media (max-width:1024px){
+  .mobile-controls{
+    position:fixed !important;
+    top:0 !important;
+    right:0 !important;
+    left:auto !important;
+    width:96px !important;
+    height:76px !important;
+    display:block !important;
+    pointer-events:none !important;
+    z-index:10050 !important;
+    overflow:visible !important;
+    transform:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+
+  .mobile-controls .mobile-theme-btn,
+  .mobile-controls .mobile-menu-btn{
+    position:fixed !important;
+    top:18px !important;
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    max-width:40px !important;
+    min-height:40px !important;
+    max-height:40px !important;
+    margin:0 !important;
+    padding:0 !important;
+    display:grid !important;
+    place-items:center !important;
+    pointer-events:auto !important;
+    z-index:10051 !important;
+    transform:none !important;
+    translate:none !important;
+    rotate:none !important;
+    scale:none !important;
+    animation:none !important;
+    transition:none !important;
+    will-change:auto !important;
+  }
+
+  .mobile-controls .mobile-menu-btn{ right:5% !important; left:auto !important; }
+  .mobile-controls .mobile-theme-btn{ right:calc(5% + 48px) !important; left:auto !important; }
+
+  .mobile-controls .mobile-theme-btn:hover,
+  .mobile-controls .mobile-theme-btn:focus,
+  .mobile-controls .mobile-theme-btn:focus-visible,
+  .mobile-controls .mobile-theme-btn:active,
+  .mobile-controls .mobile-menu-btn:hover,
+  .mobile-controls .mobile-menu-btn:focus,
+  .mobile-controls .mobile-menu-btn:focus-visible,
+  .mobile-controls .mobile-menu-btn:active{
+    top:18px !important;
+    right:auto !important;
+    left:auto !important;
+    transform:none !important;
+    translate:none !important;
+    rotate:none !important;
+    scale:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+
+  .mobile-controls .mobile-menu-btn:hover,
+  .mobile-controls .mobile-menu-btn:focus,
+  .mobile-controls .mobile-menu-btn:focus-visible,
+  .mobile-controls .mobile-menu-btn:active{ right:5% !important; }
+
+  .mobile-controls .mobile-theme-btn:hover,
+  .mobile-controls .mobile-theme-btn:focus,
+  .mobile-controls .mobile-theme-btn:focus-visible,
+  .mobile-controls .mobile-theme-btn:active{ right:calc(5% + 48px) !important; }
+
+  /* Mobile navigation opens without moving the controls. */
+  .navbar .nav-links.mobile-open,
+  .navbar .nav-links.open{
+    display:flex !important;
+  }
+
+  .mobile-controls .mobile-menu-btn span,
+  .mobile-controls .theme-icon,
+  .mobile-controls .theme-icon::before{
+    transform:none !important;
+    translate:none !important;
+    rotate:none !important;
+    scale:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+
+  /* Requested: remove Home photo/frame motion on mobile/tablet only. */
+  .hero-visual,
+  .hero-visual::before,
+  .hero-visual::after,
+  .profile-orb,
+  .profile-orb::before,
+  .profile-orb::after,
+  .profile-orb .profile-photo,
+  .hero-visual .energy-ring,
+  .hero-visual .ring-1,
+  .hero-visual .ring-2,
+  .hero-visual .float-card{
+    animation:none !important;
+    transition:none !important;
+    transform:none !important;
+    translate:none !important;
+    rotate:none !important;
+    scale:none !important;
+    will-change:auto !important;
+  }
+
+  /* Keep the scroll cue visible on mobile; only its animation is stopped. */
+  .hero-visual .scroll-cue,
+  .hero-visual .scroll-cue span::after{
+    animation:none !important;
+    transform:none !important;
+  }
+}
+
+@media (min-width:1025px){
+  .mobile-controls{ display:none !important; }
+
+  /* Explicitly retain the original desktop motion/scroll effects. */
+  .hero-visual{ transition:transform .25s ease-out !important; }
+  .hero-visual .ring-1{ animation:spin 14s linear infinite !important; }
+  .hero-visual .ring-2{ animation:spin 9s linear infinite reverse !important; }
+  .scroll-cue{ animation:bob 2s ease-in-out infinite !important; }
+  .scroll-cue span::after{ animation:wheel 1.7s infinite !important; }
+  .aurora-a{ animation:drift 9s ease-in-out infinite alternate !important; }
+  .aurora-b{ animation:drift 12s ease-in-out infinite alternate-reverse !important; }
+  .lightning{ animation:flash 5s infinite !important; }
+  .lightning-b{ animation-delay:2.3s !important; }
+  .particles i{ animation:float linear infinite !important; }
+}
