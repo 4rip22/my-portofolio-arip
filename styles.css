@@ -2681,27 +2681,46 @@ body.light .mobile-controls .theme-icon::before{
 }
 
 
-/* FINAL TARGETED MOBILE FIX — do not affect desktop. */
-@media (max-width: 700px){
-  /* Mobile controls: always visible, fixed, and stationary. */
+/* =========================================================
+   FINAL DEPLOYMENT / MOBILE OVERRIDES
+   Only fixes the requested mobile controls, mobile motion,
+   and a safe reveal fallback. Existing desktop reveal behavior
+   stays active whenever main.js loads normally.
+   ========================================================= */
+
+/* Reveal animation is opt-in when JS is active. If main.js cannot
+   load on a deployment, the portfolio content remains visible. */
+.reveal{
+  opacity:1;
+  transform:none;
+}
+html.js-ready .reveal{
+  opacity:0;
+  transform:translateY(25px);
+}
+html.js-ready .reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+@media (max-width:1024px){
+  /* Mobile/tablet controls are always visible and independent of
+     the desktop navbar controls. */
   .mobile-controls{
+    display:block !important;
     position:fixed !important;
-    top:19px !important;
-    right:5% !important;
-    left:auto !important;
-    bottom:auto !important;
-    z-index:20000 !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:flex-end !important;
-    gap:10px !important;
-    width:auto !important;
-    height:38px !important;
+    top:0 !important;
+    right:0 !important;
+    width:96px !important;
+    height:76px !important;
     margin:0 !important;
     padding:0 !important;
-    opacity:1 !important;
-    visibility:visible !important;
-    pointer-events:auto !important;
+    overflow:visible !important;
+    z-index:10050 !important;
+    pointer-events:none !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    border:0 !important;
     transform:none !important;
     animation:none !important;
     transition:none !important;
@@ -2709,91 +2728,40 @@ body.light .mobile-controls .theme-icon::before{
 
   .mobile-controls .mobile-theme-btn,
   .mobile-controls .mobile-menu-btn{
-    position:static !important;
     display:grid !important;
-    place-items:center !important;
-    width:38px !important;
-    height:38px !important;
-    min-width:38px !important;
-    min-height:38px !important;
-    max-width:38px !important;
-    max-height:38px !important;
+    position:fixed !important;
+    top:18px !important;
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    max-width:40px !important;
+    min-height:40px !important;
+    max-height:40px !important;
     margin:0 !important;
     padding:0 !important;
-    box-sizing:border-box !important;
-    opacity:1 !important;
-    visibility:visible !important;
+    pointer-events:auto !important;
+    z-index:10051 !important;
     transform:none !important;
     animation:none !important;
     transition:none !important;
     rotate:none !important;
     scale:none !important;
     translate:none !important;
+    will-change:auto !important;
   }
 
-  .mobile-controls .mobile-menu-btn{
-    gap:4px !important;
-    grid-template-rows:2px 2px 2px !important;
-    align-content:center !important;
-  }
+  .mobile-controls .mobile-menu-btn{right:5% !important;left:auto !important}
+  .mobile-controls .mobile-theme-btn{right:calc(5% + 48px) !important;left:auto !important}
 
-  .mobile-controls .mobile-menu-btn span{
-    display:block !important;
-    width:18px !important;
-    height:2px !important;
-    min-width:18px !important;
-    min-height:2px !important;
-    max-width:18px !important;
-    max-height:2px !important;
-    margin:0 !important;
-    padding:0 !important;
-    background:currentColor !important;
+  .mobile-controls .mobile-menu-btn span,
+  .mobile-controls .theme-icon,
+  .mobile-controls .theme-icon::before{
     transform:none !important;
     animation:none !important;
     transition:none !important;
   }
 
-  .mobile-controls .mobile-theme-btn .theme-icon,
-  .mobile-controls .mobile-theme-btn .theme-icon::before{
-    display:block !important;
-    position:relative !important;
-    width:18px !important;
-    height:18px !important;
-    margin:0 !important;
-    padding:0 !important;
-    transform:none !important;
-    animation:none !important;
-    transition:none !important;
-  }
-
-  .mobile-controls .mobile-theme-btn .theme-icon::before{
-    content:'☼' !important;
-    position:absolute !important;
-    inset:0 !important;
-    font-family:Arial,sans-serif !important;
-    font-size:18px !important;
-    line-height:18px !important;
-    text-align:center !important;
-  }
-
-  body.light .mobile-controls .mobile-theme-btn .theme-icon::before{
-    content:'☾' !important;
-  }
-
-  .mobile-controls .mobile-theme-btn:hover,
-  .mobile-controls .mobile-theme-btn:focus,
-  .mobile-controls .mobile-theme-btn:focus-visible,
-  .mobile-controls .mobile-theme-btn:active,
-  .mobile-controls .mobile-menu-btn:hover,
-  .mobile-controls .mobile-menu-btn:focus,
-  .mobile-controls .mobile-menu-btn:focus-visible,
-  .mobile-controls .mobile-menu-btn:active{
-    transform:none !important;
-    animation:none !important;
-    transition:none !important;
-  }
-
-  /* Home photo/frame/effects: completely static on mobile. */
+  /* Stop only the requested Home visual motion on mobile/tablet. */
   .hero-visual,
   .hero-visual::before,
   .hero-visual::after,
@@ -2805,7 +2773,8 @@ body.light .mobile-controls .theme-icon::before{
   .hero-visual .ring-1,
   .hero-visual .ring-2,
   .hero-visual .float-card,
-  .hero-visual .orb-core{
+  .hero-visual .scroll-cue,
+  .hero-visual .scroll-cue span::after{
     animation:none !important;
     transition:none !important;
     transform:none !important;
@@ -2816,6 +2785,6 @@ body.light .mobile-controls .theme-icon::before{
   }
 }
 
-@media (min-width:701px){
-  .mobile-controls{display:none !important;}
+@media (min-width:1025px){
+  .mobile-controls{display:none !important}
 }

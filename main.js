@@ -1,6 +1,10 @@
 const $ = s => document.querySelector(s),
       $$ = s => document.querySelectorAll(s);
 
+// Mark JavaScript as active. The CSS uses this class to keep reveal animations
+// on desktop while still showing the portfolio if the script is blocked.
+document.documentElement.classList.add('js-ready');
+
 const words = [
   'Web Developer',
   'Backend Developer',
@@ -97,43 +101,27 @@ if (menu && nav) {
 // SCROLL REVEAL
 // ===============================
 
-let revealObserverWorked = false;
+const obs = new IntersectionObserver(
+  entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
 
-try {
-  const obs = new IntersectionObserver(
-    entries => {
-      revealObserverWorked = true;
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-
-          e.target.style.setProperty(
-            '--reveal-delay',
-            (Array.from(e.target.parentElement?.children || [])
-              .indexOf(e.target) % 5) * 80 + 'ms'
-          );
-        }
-      });
-    },
-    {
-      threshold: 0.10,
-      rootMargin: '0px 0px -30px'
-    }
-  );
-
-  $$('.reveal').forEach(e => obs.observe(e));
-} catch (error) {
-  // Keep the portfolio visible if the browser blocks IntersectionObserver.
-  $$('.reveal').forEach(e => e.classList.add('visible'));
-}
-
-// Deployment-safe fallback: if the observer never fires, do not leave the
-// portfolio permanently hidden behind .reveal { opacity: 0; }.
-window.setTimeout(() => {
-  if (!revealObserverWorked) {
-    $$('.reveal').forEach(e => e.classList.add('visible'));
+        e.target.style.setProperty(
+          '--reveal-delay',
+          (Array.from(e.target.parentElement?.children || [])
+            .indexOf(e.target) % 5) * 80 + 'ms'
+        );
+      }
+    });
+  },
+  {
+    threshold: 0.10,
+    rootMargin: '0px 0px -30px'
   }
-}, 2000);
+);
+
+$$('.reveal').forEach(e => obs.observe(e));
 
 
 // ===============================
