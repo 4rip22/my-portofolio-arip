@@ -2930,3 +2930,17 @@ html.js-ready .reveal.visible{
   .lightning-b{ animation-delay:2.3s !important; }
   .particles i{ animation:float linear infinite !important; }
 }
+
+
+/* FINAL INTERACTION STABILITY FIX */
+.project-lightbox{z-index:100000 !important;}
+.project-lightbox.active{pointer-events:auto !important;visibility:visible !important;opacity:1 !important;}
+.project-lightbox img{cursor:zoom-in !important;transform-origin:center center !important;}
+.project-lightbox-close{z-index:100001 !important;pointer-events:auto !important;}
+.scroll-cue{cursor:pointer !important;pointer-events:auto !important;}
+@media (max-width:1024px){
+  .mobile-controls{z-index:200000 !important;pointer-events:none !important;}
+  .mobile-controls .mobile-theme-btn,.mobile-controls .mobile-menu-btn{z-index:200001 !important;pointer-events:auto !important;touch-action:manipulation !important;}
+  .navbar{z-index:19999 !important;}
+  .nav-links.open,.nav-links.mobile-open{z-index:200000 !important;pointer-events:auto !important;}
+}
