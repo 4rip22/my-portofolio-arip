@@ -12,33 +12,44 @@ const words = [
   'Full-Stack Developer'
 ];
 
-let wi = 0,
-    ci = 0,
-    deleting = false;
+// Hero typing animation. Start after the DOM is ready so the animation
+// cannot fail simply because the script is evaluated before #typing exists.
+function startTypingAnimation() {
+  const el = document.getElementById('typing');
+  if (!el) return;
 
-function type() {
-  const el = $('#typing');
-  const word = words[wi];
+  let wi = 0;
+  let ci = 0;
+  let deleting = false;
 
-  el.textContent = word.slice(0, ci);
+  function type() {
+    const word = words[wi];
+    el.textContent = word.slice(0, ci);
 
-  if (!deleting && ci < word.length) {
-    ci++;
-    setTimeout(type, 80);
-  } else if (!deleting) {
-    deleting = true;
-    setTimeout(type, 1400);
-  } else if (ci > 0) {
-    ci--;
-    setTimeout(type, 40);
-  } else {
-    deleting = false;
-    wi = (wi + 1) % words.length;
-    setTimeout(type, 250);
+    if (!deleting && ci < word.length) {
+      ci++;
+      setTimeout(type, 80);
+    } else if (!deleting) {
+      deleting = true;
+      setTimeout(type, 1400);
+    } else if (ci > 0) {
+      ci--;
+      setTimeout(type, 40);
+    } else {
+      deleting = false;
+      wi = (wi + 1) % words.length;
+      setTimeout(type, 250);
+    }
   }
+
+  type();
 }
 
-type();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startTypingAnimation, { once: true });
+} else {
+  startTypingAnimation();
+}
 
 
 // ===============================
