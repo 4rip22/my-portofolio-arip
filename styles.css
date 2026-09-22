@@ -2679,3 +2679,36 @@ body.light .mobile-controls .theme-icon::before{
     max-width:84vw !important;
   }
 }
+
+/* FINAL MOBILE HERO MOTION FIX
+   Mobile only: keep the profile photo, frame/rings and floating hero
+   effects completely still. Desktop remains unchanged. */
+@media (max-width:700px){
+  .hero-visual,
+  .profile-orb,
+  .profile-orb .profile-photo,
+  .energy-ring,
+  .float-card{
+    animation:none !important;
+    transform:none !important;
+    transition:none !important;
+    will-change:auto !important;
+  }
+
+  .ring-1,
+  .ring-2{
+    animation:none !important;
+    transform:rotateX(68deg) rotateZ(-18deg) !important;
+  }
+
+  .aurora,
+  .lightning,
+  .particles{
+    animation:none !important;
+  }
+
+  .particles i{
+    animation:none !important;
+    opacity:.2 !important;
+  }
+}

@@ -119,6 +119,22 @@ const obs = new IntersectionObserver(
 
 $$('.reveal').forEach(e => obs.observe(e));
 
+// Safety fallback: if an observer is unavailable or a deployment/browser
+// delays the observer callback, reveal the content without changing the
+// normal IntersectionObserver animation.
+if (!('IntersectionObserver' in window)) {
+  $$('.reveal').forEach(e => e.classList.add('visible'));
+} else {
+  setTimeout(() => {
+    $$('.reveal').forEach(e => {
+      if (!e.classList.contains('visible')) {
+        const r = e.getBoundingClientRect();
+        if (r.top < window.innerHeight * 1.15) e.classList.add('visible');
+      }
+    });
+  }, 1200);
+}
+
 
 // ===============================
 // CARD TILT EFFECT
