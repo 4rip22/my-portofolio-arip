@@ -2680,35 +2680,142 @@ body.light .mobile-controls .theme-icon::before{
   }
 }
 
-/* FINAL MOBILE HERO MOTION FIX
-   Mobile only: keep the profile photo, frame/rings and floating hero
-   effects completely still. Desktop remains unchanged. */
-@media (max-width:700px){
-  .hero-visual,
-  .profile-orb,
-  .profile-orb .profile-photo,
-  .energy-ring,
-  .float-card{
-    animation:none !important;
+
+/* FINAL TARGETED MOBILE FIX — do not affect desktop. */
+@media (max-width: 700px){
+  /* Mobile controls: always visible, fixed, and stationary. */
+  .mobile-controls{
+    position:fixed !important;
+    top:19px !important;
+    right:5% !important;
+    left:auto !important;
+    bottom:auto !important;
+    z-index:20000 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:10px !important;
+    width:auto !important;
+    height:38px !important;
+    margin:0 !important;
+    padding:0 !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
     transform:none !important;
+    animation:none !important;
     transition:none !important;
+  }
+
+  .mobile-controls .mobile-theme-btn,
+  .mobile-controls .mobile-menu-btn{
+    position:static !important;
+    display:grid !important;
+    place-items:center !important;
+    width:38px !important;
+    height:38px !important;
+    min-width:38px !important;
+    min-height:38px !important;
+    max-width:38px !important;
+    max-height:38px !important;
+    margin:0 !important;
+    padding:0 !important;
+    box-sizing:border-box !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+    animation:none !important;
+    transition:none !important;
+    rotate:none !important;
+    scale:none !important;
+    translate:none !important;
+  }
+
+  .mobile-controls .mobile-menu-btn{
+    gap:4px !important;
+    grid-template-rows:2px 2px 2px !important;
+    align-content:center !important;
+  }
+
+  .mobile-controls .mobile-menu-btn span{
+    display:block !important;
+    width:18px !important;
+    height:2px !important;
+    min-width:18px !important;
+    min-height:2px !important;
+    max-width:18px !important;
+    max-height:2px !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:currentColor !important;
+    transform:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+
+  .mobile-controls .mobile-theme-btn .theme-icon,
+  .mobile-controls .mobile-theme-btn .theme-icon::before{
+    display:block !important;
+    position:relative !important;
+    width:18px !important;
+    height:18px !important;
+    margin:0 !important;
+    padding:0 !important;
+    transform:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+
+  .mobile-controls .mobile-theme-btn .theme-icon::before{
+    content:'☼' !important;
+    position:absolute !important;
+    inset:0 !important;
+    font-family:Arial,sans-serif !important;
+    font-size:18px !important;
+    line-height:18px !important;
+    text-align:center !important;
+  }
+
+  body.light .mobile-controls .mobile-theme-btn .theme-icon::before{
+    content:'☾' !important;
+  }
+
+  .mobile-controls .mobile-theme-btn:hover,
+  .mobile-controls .mobile-theme-btn:focus,
+  .mobile-controls .mobile-theme-btn:focus-visible,
+  .mobile-controls .mobile-theme-btn:active,
+  .mobile-controls .mobile-menu-btn:hover,
+  .mobile-controls .mobile-menu-btn:focus,
+  .mobile-controls .mobile-menu-btn:focus-visible,
+  .mobile-controls .mobile-menu-btn:active{
+    transform:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+
+  /* Home photo/frame/effects: completely static on mobile. */
+  .hero-visual,
+  .hero-visual::before,
+  .hero-visual::after,
+  .profile-orb,
+  .profile-orb::before,
+  .profile-orb::after,
+  .profile-orb .profile-photo,
+  .hero-visual .energy-ring,
+  .hero-visual .ring-1,
+  .hero-visual .ring-2,
+  .hero-visual .float-card,
+  .hero-visual .orb-core{
+    animation:none !important;
+    transition:none !important;
+    transform:none !important;
+    translate:none !important;
+    rotate:none !important;
+    scale:none !important;
     will-change:auto !important;
   }
+}
 
-  .ring-1,
-  .ring-2{
-    animation:none !important;
-    transform:rotateX(68deg) rotateZ(-18deg) !important;
-  }
-
-  .aurora,
-  .lightning,
-  .particles{
-    animation:none !important;
-  }
-
-  .particles i{
-    animation:none !important;
-    opacity:.2 !important;
-  }
+@media (min-width:701px){
+  .mobile-controls{display:none !important;}
 }

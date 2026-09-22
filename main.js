@@ -97,43 +97,43 @@ if (menu && nav) {
 // SCROLL REVEAL
 // ===============================
 
-const obs = new IntersectionObserver(
-  entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
+let revealObserverWorked = false;
 
-        e.target.style.setProperty(
-          '--reveal-delay',
-          (Array.from(e.target.parentElement?.children || [])
-            .indexOf(e.target) % 5) * 80 + 'ms'
-        );
-      }
-    });
-  },
-  {
-    threshold: 0.10,
-    rootMargin: '0px 0px -30px'
-  }
-);
+try {
+  const obs = new IntersectionObserver(
+    entries => {
+      revealObserverWorked = true;
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
 
-$$('.reveal').forEach(e => obs.observe(e));
+          e.target.style.setProperty(
+            '--reveal-delay',
+            (Array.from(e.target.parentElement?.children || [])
+              .indexOf(e.target) % 5) * 80 + 'ms'
+          );
+        }
+      });
+    },
+    {
+      threshold: 0.10,
+      rootMargin: '0px 0px -30px'
+    }
+  );
 
-// Safety fallback: if an observer is unavailable or a deployment/browser
-// delays the observer callback, reveal the content without changing the
-// normal IntersectionObserver animation.
-if (!('IntersectionObserver' in window)) {
+  $$('.reveal').forEach(e => obs.observe(e));
+} catch (error) {
+  // Keep the portfolio visible if the browser blocks IntersectionObserver.
   $$('.reveal').forEach(e => e.classList.add('visible'));
-} else {
-  setTimeout(() => {
-    $$('.reveal').forEach(e => {
-      if (!e.classList.contains('visible')) {
-        const r = e.getBoundingClientRect();
-        if (r.top < window.innerHeight * 1.15) e.classList.add('visible');
-      }
-    });
-  }, 1200);
 }
+
+// Deployment-safe fallback: if the observer never fires, do not leave the
+// portfolio permanently hidden behind .reveal { opacity: 0; }.
+window.setTimeout(() => {
+  if (!revealObserverWorked) {
+    $$('.reveal').forEach(e => e.classList.add('visible'));
+  }
+}, 2000);
 
 
 // ===============================
