@@ -10,13 +10,5 @@
   },
   "devDependencies": {
     "vite": "^7.1.5"
-  },
-  "description": "portofolio",
-  "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "{"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
