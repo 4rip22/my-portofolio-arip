@@ -304,7 +304,7 @@
   border:2px solid #d8f4ff;
   box-shadow:0 0 16px #43a9ff,0 0 35px rgba(67,169,255,.65);
   z-index:6;
-  pointer-events:none;
+  pointer-even@keyframes profileFloatts:none;
 }
 .hero-visual::before{
   right:17%;
@@ -325,7 +325,7 @@
 .ring-1{border-color:rgba(84,181,255,.42)}
 .ring-2{border-color:rgba(155,105,255,.35)}
 
-@keyframes profileFloatModern{
+Modern{
   0%,100%{transform:translateY(0) rotate(0deg)}
   50%{transform:translateY(-8px) rotate(.45deg)}
 }
@@ -2796,6 +2796,9 @@ html.js-ready .reveal.visible{
    ========================================================= */
 
 @media (max-width:1024px){
+  .profile-orb .profile-photo {
+    object-position: 2% top !important;
+  }
   .mobile-controls{
     position:fixed !important;
     top:0 !important;
@@ -2944,3 +2947,4 @@ html.js-ready .reveal.visible{
   .navbar{z-index:19999 !important;}
   .nav-links.open,.nav-links.mobile-open{z-index:200000 !important;pointer-events:auto !important;}
 }
+
